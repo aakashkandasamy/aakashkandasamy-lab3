@@ -43,7 +43,7 @@ public class WordCounter {
             return processFile(scanner.nextLine());
         }
         return content;
-    }
+    } 
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
