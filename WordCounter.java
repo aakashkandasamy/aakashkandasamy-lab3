@@ -110,8 +110,6 @@ public class WordCounter {
             }
         } catch (TooSmallText e) {
             System.out.println("Warning: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println(e);
         }
     }
 }
