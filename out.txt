@@ -1,2 +1,1 @@
-Choose option: 1 for file, 2 for text
 Warning: TooSmallText: Only found 2 words.

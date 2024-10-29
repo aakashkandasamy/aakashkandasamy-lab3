@@ -1,7 +1,5 @@
-import java.io.IOException;
-
-public class EmptyFileException extends IOException {
+public class EmptyFileException extends Exception {
     public EmptyFileException(String message) {
-        super("EmptyFileException: " + message);
+        super(message);
     }
 }

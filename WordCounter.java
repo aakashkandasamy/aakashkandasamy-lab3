@@ -38,11 +38,19 @@ public class WordCounter {
                     throw new EmptyFileException(path + " was empty");
                 }
                 return new StringBuffer(fileContent);
+            } catch (EmptyFileException e) {
+                throw e; // Propagate the exception upwards
             } catch (IOException e) {
                 System.out.println("File not found: " + path + ". Please re-enter the filename.");
-                path = scanner.nextLine();
+                if (scanner.hasNextLine()) {
+                    path = scanner.nextLine();
+                } else {
+                    // If no input is available (e.g., during testing), exit the loop
+                    break;
+                }
             }
         }
+        return null;
     }
 
     public static String getFileContents(String filename) throws IOException {
@@ -54,7 +62,7 @@ public class WordCounter {
 
         int option = 0;
         while (option != 1 && option != 2) {
-            System.out.println("Choose option: 1 for file, 2 for text");
+//            System.out.println("Choose option: 1 for file, 2 for text");
             try {
                 option = Integer.parseInt(scanner.nextLine());
                 if (option != 1 && option != 2) {
@@ -77,25 +85,33 @@ public class WordCounter {
             if (option == 1) {
                 String filename = input;
                 StringBuffer content = processFile(filename);
-                int wordCount = processText(content, stopword);
-                System.out.println("Found " + wordCount + " words.");
+                if (content != null) {
+                    int wordCount = processText(content, stopword);
+                    System.out.println("Found " + wordCount + " words.");
+                } else {
+                    System.out.println("No content to process.");
+                }
             } else if (option == 2) {
                 String text = input;
                 int wordCount = processText(new StringBuffer(text), stopword);
                 System.out.println("Found " + wordCount + " words.");
             }
         } catch (EmptyFileException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         } catch (InvalidStopwordException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             System.out.print("Enter a valid stopword: ");
             stopword = scanner.nextLine();
             try {
                 if (option == 1) {
                     String filename = input;
                     StringBuffer content = processFile(filename);
-                    int wordCount = processText(content, stopword);
-                    System.out.println("Found " + wordCount + " words.");
+                    if (content != null) {
+                        int wordCount = processText(content, stopword);
+                        System.out.println("Found " + wordCount + " words.");
+                    } else {
+                        System.out.println("No content to process.");
+                    }
                 } else if (option == 2) {
                     String text = input;
                     int wordCount = processText(new StringBuffer(text), stopword);
@@ -106,7 +122,7 @@ public class WordCounter {
             } catch (TooSmallText ex) {
                 System.out.println("Warning: " + ex.getMessage());
             } catch (EmptyFileException ex) {
-                System.out.println(ex);
+                System.out.println(ex.getMessage());
             }
         } catch (TooSmallText e) {
             System.out.println("Warning: " + e.getMessage());
