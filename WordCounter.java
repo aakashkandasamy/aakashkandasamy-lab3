@@ -16,34 +16,38 @@ public class WordCounter {
             wordCount++;
             if (!stopwordFound && matcher.group().equals(stopword)) {
                 stopwordFound = true;
+                break; // Stop counting words after finding the stopword
             }
         }
 
-        if (wordCount < 5) {
-            throw new TooSmallText("TooSmallText: Only found " + wordCount + " words.");
-        }
-        if (!stopwordFound) {
+        if (!stopwordFound && stopword != null) {
             throw new InvalidStopwordException("Couldn't find stopword: " + stopword);
+        }
+        if (wordCount < 5) {
+            throw new TooSmallText("Only found " + wordCount + " words.");
         }
         return wordCount;
     }
 
     public static StringBuffer processFile(String path) throws EmptyFileException {
-        StringBuffer content = new StringBuffer();
-
-        try {
-            String fileContent = new String(Files.readAllBytes(Paths.get(path)));
-            if (fileContent.trim().isEmpty()) {
-                throw new EmptyFileException(path + " was empty");
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            try {
+                String fileContent = getFileContents(path);
+                if (fileContent.trim().isEmpty()) {
+                    throw new EmptyFileException(path + " was empty");
+                }
+                return new StringBuffer(fileContent);
+            } catch (IOException e) {
+                System.out.println("File not found: " + path + ". Please re-enter the filename.");
+                path = scanner.nextLine();
             }
-            content.append(fileContent);
-        } catch (IOException e) {
-            System.out.println("File not found: " + path + ". Please re-enter the filename.");
-            Scanner scanner = new Scanner(System.in);
-            return processFile(scanner.nextLine());
         }
-        return content;
-    } 
+    }
+
+    public static String getFileContents(String filename) throws IOException {
+        return new String(Files.readAllBytes(Paths.get(filename)));
+    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -61,55 +65,53 @@ public class WordCounter {
             }
         }
 
+        if (args.length < 1) {
+            System.out.println("No filename or text provided.");
+            return;
+        }
+
+        String input = args[0];
         String stopword = args.length > 1 ? args[1] : null;
+
         try {
             if (option == 1) {
-                // Process file
-                System.out.print("Enter the filename: ");
-                String filename = scanner.nextLine();
+                String filename = input;
                 StringBuffer content = processFile(filename);
-
-                boolean validStopword = false;
-                while (!validStopword) {
-                    try {
-                        int wordCount = processText(content, stopword);
-                        System.out.println("Word count: " + wordCount);
-                        validStopword = true;
-                    } catch (InvalidStopwordException e) {
-                        System.out.println(e.getMessage());
-                        System.out.print("Enter a valid stopword: ");
-                        stopword = scanner.nextLine();
-                    } catch (TooSmallText e) {
-                        System.out.println("Warning: " + e.getMessage());
-                        validStopword = true;
-                    }
-                }
+                int wordCount = processText(content, stopword);
+                System.out.println("Found " + wordCount + " words.");
             } else if (option == 2) {
-
-                System.out.print("Enter the text: ");
-                String text = scanner.nextLine();
-
-                try {
-                    int wordCount = processText(new StringBuffer(text), stopword);
-                    System.out.println("Word count: " + wordCount);
-                } catch (TooSmallText e) {
-                    System.out.println("Warning: " + e.getMessage());
-                } catch (InvalidStopwordException e) {
-                    System.out.println(e.getMessage());
-                    System.out.print("Enter a valid stopword: ");
-                    stopword = scanner.nextLine();
-                    try {
-                        int wordCount = processText(new StringBuffer(text), stopword);
-                        System.out.println("Word count: " + wordCount);
-                    } catch (InvalidStopwordException ex) {
-                        System.out.println("Couldn't find the stopword again: " + ex.getMessage());
-                    } catch (TooSmallText ex) {
-                        System.out.println("Warning: " + ex.getMessage());
-                    }
-                }
+                String text = input;
+                int wordCount = processText(new StringBuffer(text), stopword);
+                System.out.println("Found " + wordCount + " words.");
             }
         } catch (EmptyFileException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
+        } catch (InvalidStopwordException e) {
+            System.out.println(e);
+            System.out.print("Enter a valid stopword: ");
+            stopword = scanner.nextLine();
+            try {
+                if (option == 1) {
+                    String filename = input;
+                    StringBuffer content = processFile(filename);
+                    int wordCount = processText(content, stopword);
+                    System.out.println("Found " + wordCount + " words.");
+                } else if (option == 2) {
+                    String text = input;
+                    int wordCount = processText(new StringBuffer(text), stopword);
+                    System.out.println("Found " + wordCount + " words.");
+                }
+            } catch (InvalidStopwordException ex) {
+                System.out.println("Couldn't find the stopword again: " + ex.getMessage());
+            } catch (TooSmallText ex) {
+                System.out.println("Warning: " + ex.getMessage());
+            } catch (EmptyFileException ex) {
+                System.out.println(ex);
+            }
+        } catch (TooSmallText e) {
+            System.out.println("Warning: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 }
