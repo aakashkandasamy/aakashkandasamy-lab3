@@ -211,8 +211,7 @@ public class Lab3_Tester {
       WordCounter.main(args);
       System.setOut(sysOutBackup); // optionally, reset System.in to its original
       System.setIn(sysInBackup); // optionally, reset System.in to its original
-      result = getFileContents("out.txt");
-      
+      result = WordCounter.getFileContents("out.txt");      
     } catch (Exception e){
       result = "error";
       e.printStackTrace();
@@ -261,8 +260,7 @@ public class Lab3_Tester {
       WordCounter.main(args);
       System.setOut(sysOutBackup); // optionally, reset System.in to its original
       System.setIn(sysInBackup); // optionally, reset System.in to its original
-      result = getFileContents("out.txt");
-      
+      result = WordCounter.getFileContents("out.txt");      
     } catch (Exception e){
       result = "error";
       e.printStackTrace();
@@ -311,7 +309,7 @@ public class Lab3_Tester {
       WordCounter.main(args);
       System.setOut(sysOutBackup); // optionally, reset System.in to its original
       System.setIn(sysInBackup); // optionally, reset System.in to its original
-      result = getFileContents("out.txt");
+      result = WordCounter.getFileContents("out.txt");
       System.out.println("this is what we got from main:\n" + result);
       
     } catch (Exception e){
@@ -362,7 +360,7 @@ public class Lab3_Tester {
       WordCounter.main(args);
       System.setOut(sysOutBackup); // optionally, reset System.in to its original
       System.setIn(sysInBackup); // optionally, reset System.in to its original
-      result = getFileContents("out.txt");
+      result = WordCounter.getFileContents("out.txt");      
       System.out.println("this is what we got from main:\n" + result);
       
     } catch (Exception e){
