@@ -1,3 +1,51 @@
+commit a55e4471491dbe4a3c763bbf382857a021d6a5bf
+Author: aakashkandasamy <aakashkandasamy@gmail.com>
+Date:   Tue Oct 29 12:55:55 2024 -0400
+
+    run
+
+commit 5f529d879ae0393fbd8e1f9b71e3b85f12ae0eef
+Author: aakashkandasamy <aakashkandasamy@gmail.com>
+Date:   Tue Oct 29 12:30:26 2024 -0400
+
+    Updated Lab3_tester
+
+commit f684cb5ca70aeb0320a73cf7d9762a3d5bac5474
+Author: aakashkandasamy <aakashkandasamy@gmail.com>
+Date:   Tue Oct 29 12:18:03 2024 -0400
+
+    Update Lab3_Tester.java
+
+commit 6cddc2d2cfa7d8f18cae522681d843563629e33a
+Author: aakashkandasamy <aakashkandasamy@gmail.com>
+Date:   Mon Oct 28 22:58:22 2024 -0400
+
+    Updating imports for labtester
+
+commit c4d6de6ba0f4671e5e7e538b0bf319a399e63ace
+Author: aakashkandasamy <aakashkandasamy@gmail.com>
+Date:   Mon Oct 28 21:43:50 2024 -0400
+
+    Update Lab3_Tester.java
+
+commit 9121aab0f1fb01b009ea2ed386d3b548fd9ab482
+Author: aakashkandasamy <aakashkandasamy@gmail.com>
+Date:   Mon Oct 28 19:19:36 2024 -0400
+
+    debugging file finding errors
+
+commit 30df02688f844fd602c19e3f375b170ed37bae52
+Author: aakashkandasamy <aakashkandasamy@gmail.com>
+Date:   Mon Oct 28 19:14:22 2024 -0400
+
+    Attempting to process and catch TooSmallText warning if applicable
+
+commit 7a1da70be73a8ad8572a69e5ddce79c3b2dc93de
+Author: aakashkandasamy <aakashkandasamy@gmail.com>
+Date:   Wed Oct 23 16:20:18 2024 -0400
+
+    Update log_file.txt
+
 commit f09a7d74ff5241e9636f0c8a05d8b0297d62b16b
 Author: aakashkandasamy <aakashkandasamy@gmail.com>
 Date:   Wed Oct 23 16:19:47 2024 -0400
