@@ -166,4 +166,207 @@ public class Lab3_Tester {
     assertEquals("EmptyFileException: empty.txt was empty", result);
   }
 
+    @Test
+  public void test11() {
+    System.out.println("test main valid number choice 1 with stopword");
+    try {
+      String strCurrentLine = null;
+      BufferedWriter file = new BufferedWriter(new FileWriter("file1.txt"));
+      String expected = "items that are greater than five yes words";
+      file.write(expected);
+      file.close();
+    } catch (IOException err1) { }
+
+    String result = "failed to ask for a new option";
+    try {
+      InputStream sysInBackup = System.in; // backup System.in to restore it later
+      ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
+      System.setIn(in);
+
+      PrintStream sysOutBackup   = null;
+      PrintStream output  = null;
+      try {
+        //Process process = Runtime.getRuntime().exec("rm out.txt");
+        sysOutBackup = System.out; // Saving the original System.out to restore it later
+        File f1 = new File("out.txt");
+        if(f1.exists()) { 
+            f1.delete();
+        }
+        output = new PrintStream(new FileOutputStream("out.txt",true));
+        System.setOut(output); // Redirecting console output to file
+        System.setErr(output);// Redirecting runtime exceptions to file
+      }
+      catch (Exception e)
+      {
+        System.out.println("error in output redirection");
+        e.printStackTrace();
+      }
+
+      String[] args = {"file1.txt", "than"};
+      WordCounter.main(args);
+      System.setOut(sysOutBackup); // optionally, reset System.in to its original
+      System.setIn(sysInBackup); // optionally, reset System.in to its original
+      result = getFileContents("out.txt");
+      
+    } catch (Exception e){
+      result = "error";
+      e.printStackTrace();
+    } 
+
+    String expected = "Found 5 words.";
+    assertEquals(expected, result);
+  }
+
+  @Test
+  public void test12() {
+    System.out.println("test main valid number choice 1 no stopword");
+    try {
+      String strCurrentLine = null;
+      BufferedWriter file = new BufferedWriter(new FileWriter("file1.txt"));
+      String expected = "items that need counted are greater than five words";
+      file.write(expected);
+      file.close();
+    } catch (IOException err1) { }
+
+    String result = "failed to ask for a new option";
+    try {
+      InputStream sysInBackup = System.in; // backup System.in to restore it later
+      ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
+      System.setIn(in);
+
+      PrintStream sysOutBackup   = null;
+      PrintStream output  = null;
+      try {
+        sysOutBackup = System.out; // Saving the original System.out to restore it later
+        File f1 = new File("out.txt");
+        if(f1.exists()) { 
+            f1.delete();
+        }
+        output = new PrintStream(new FileOutputStream("out.txt",true));
+        System.setOut(output); // Redirecting console output to file
+        System.setErr(output);// Redirecting runtime exceptions to file
+      }
+      catch (Exception e)
+      {
+        System.out.println("error in output redirection");
+        e.printStackTrace();
+      }
+
+      String[] args = {"file1.txt"};
+      WordCounter.main(args);
+      System.setOut(sysOutBackup); // optionally, reset System.in to its original
+      System.setIn(sysInBackup); // optionally, reset System.in to its original
+      result = getFileContents("out.txt");
+      
+    } catch (Exception e){
+      result = "error";
+      e.printStackTrace();
+    } 
+
+    String expected = "Found 9 words.";
+    assertEquals(expected, result);
+  }
+
+  @Test
+  public void test13() {
+    System.out.println("test main valid number choice 1 empty file");
+    try {
+      String strCurrentLine = null;
+      BufferedWriter file = new BufferedWriter(new FileWriter("file1.txt"));
+      String expected = "";
+      file.write(expected);
+      file.close();
+    } catch (IOException err1) { }
+
+    String result = "failed to ask for a new option";
+    try {
+      InputStream sysInBackup = System.in; // backup System.in to restore it later
+      ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
+      System.setIn(in);
+
+      PrintStream sysOutBackup   = null;
+      PrintStream output  = null;
+      try {
+        sysOutBackup = System.out; // Saving the original System.out to restore it later
+        File f1 = new File("out.txt");
+        if(f1.exists()) { 
+            f1.delete();
+        }
+        output = new PrintStream(new FileOutputStream("out.txt",true));
+        System.setOut(output); // Redirecting console output to file
+        System.setErr(output);// Redirecting runtime exceptions to file
+      }
+      catch (Exception e)
+      {
+        System.out.println("error in output redirection");
+        e.printStackTrace();
+      }
+
+      String[] args = {"file1.txt"};
+      WordCounter.main(args);
+      System.setOut(sysOutBackup); // optionally, reset System.in to its original
+      System.setIn(sysInBackup); // optionally, reset System.in to its original
+      result = getFileContents("out.txt");
+      System.out.println("this is what we got from main:\n" + result);
+      
+    } catch (Exception e){
+      result = "error";
+      e.printStackTrace();
+    } 
+
+    String expected = "TooSmallText: Only found 0 words.";
+    assertEquals(expected, result);
+  }
+
+  @Test
+  public void test14() {
+    System.out.println("test main valid number choice 1 empty file");
+    try {
+      String strCurrentLine = null;
+      BufferedWriter file = new BufferedWriter(new FileWriter("file1.txt"));
+      String expected = "shor tt";
+      file.write(expected);
+      file.close();
+    } catch (IOException err1) { }
+
+    String result = "failed to ask for a new option";
+    try {
+      InputStream sysInBackup = System.in; // backup System.in to restore it later
+      ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
+      System.setIn(in);
+
+      PrintStream sysOutBackup   = null;
+      PrintStream output  = null;
+      try {
+        sysOutBackup = System.out; // Saving the original System.out to restore it later
+        File f1 = new File("out.txt");
+        if(f1.exists()) { 
+            f1.delete();
+        }
+        output = new PrintStream(new FileOutputStream("out.txt",true));
+        System.setOut(output); // Redirecting console output to file
+        System.setErr(output);// Redirecting runtime exceptions to file
+      }
+      catch (Exception e)
+      {
+        System.out.println("error in output redirection");
+        e.printStackTrace();
+      }
+
+      String[] args = {"file1.txt"};
+      WordCounter.main(args);
+      System.setOut(sysOutBackup); // optionally, reset System.in to its original
+      System.setIn(sysInBackup); // optionally, reset System.in to its original
+      result = getFileContents("out.txt");
+      System.out.println("this is what we got from main:\n" + result);
+      
+    } catch (Exception e){
+      result = "error";
+      e.printStackTrace();
+    } 
+
+    String expected = "TooSmallText: Only found 2 words.";
+    assertEquals(expected, result);
+  }
+
 }
