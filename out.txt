@@ -1,1 +1,1 @@
-Warning: TooSmallText: Only found 2 words.
+Only found 2 words.

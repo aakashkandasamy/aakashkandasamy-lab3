@@ -120,12 +120,12 @@ public class WordCounter {
             } catch (InvalidStopwordException ex) {
                 System.out.println("Couldn't find the stopword again: " + ex.getMessage());
             } catch (TooSmallText ex) {
-                System.out.println("Warning: " + ex.getMessage());
+                System.out.println(ex.getMessage());
             } catch (EmptyFileException ex) {
                 System.out.println(ex.getMessage());
             }
         } catch (TooSmallText e) {
-            System.out.println("Warning: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 }

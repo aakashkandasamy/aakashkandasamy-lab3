@@ -1,5 +1,5 @@
 public class TooSmallText extends Exception {
     public TooSmallText(String message) {
-        super("TooSmallText: " + message);
+        super(message);
     }
 }
