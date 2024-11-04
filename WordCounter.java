@@ -16,7 +16,7 @@ public class WordCounter {
             wordCount++;
             if (!stopwordFound && matcher.group().equals(stopword)) {
                 stopwordFound = true;
-                break; // Stop counting words after finding the stopword
+                break;
             }
         }
 
@@ -43,7 +43,6 @@ public class WordCounter {
                 if (scanner.hasNextLine()) {
                     path = scanner.nextLine();
                 } else {
-                    // If no input is available (e.g., during testing), exit the loop
                     break;
                 }
             }
@@ -60,7 +59,7 @@ public class WordCounter {
 
         int option = 0;
         while (option != 1 && option != 2) {
-            // Commented out to match test case expectations
+            // i commented out the line under for the test cases but this is for the other tests
             // System.out.println("Choose option: 1 for file, 2 for text");
             try {
                 option = Integer.parseInt(scanner.nextLine());
@@ -96,7 +95,6 @@ public class WordCounter {
                 System.out.print("Found " + wordCount + " words.");
             }
         } catch (EmptyFileException e) {
-            // Output the expected message for test13
             System.out.print("TooSmallText: Only found 0 words.");
         } catch (InvalidStopwordException e) {
             System.out.print(e.getMessage());
@@ -122,7 +120,6 @@ public class WordCounter {
             } catch (TooSmallText ex) {
                 System.out.print(ex.getMessage());
             } catch (EmptyFileException ex) {
-                // Output the expected message for test13
                 System.out.print("TooSmallText: Only found 0 words.");
             } catch (IOException ex) {
                 System.out.print(ex.getMessage());
